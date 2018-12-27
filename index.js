@@ -44,7 +44,9 @@ const getData = async (apikey, limit, lastId = null) => {
 
 const getFileName = () => {
   const d = new Date()
-  return `./results/${d.getFullYear()}${d.getMonth() + 1}${d.getDate()}${d.getMinutes()}.csv`
+  const hour = d.getHours() < 10 ? `0${d.getHours()}` : d.getHours();
+  const minute = d.getMinutes() < 10 ? `0${d.getMinutes()}` : d.getMinutes();
+  return `./results/${d.getFullYear()}${d.getMonth() + 1}${d.getDate()}${hour}${minute}.csv`
 }
 
 const main = async () => {
@@ -73,6 +75,7 @@ const main = async () => {
       
       console.log('=> total count: '+ res.length)
       for (const link of res) {
+        link.creator = JSON.stringify(link.creator)
         csvWriter.write(link)
       }
 
