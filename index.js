@@ -71,7 +71,7 @@ const main = async () => {
       console.log(`Requesting page ${(iter + 1)} ...`)
       const res = await getData(process.env.apiKey, DATA_PER_PAGE, lastId)
       
-      console.log('total count: '+ res.length)
+      console.log('=> total count: '+ res.length)
       for (const link of res) {
         csvWriter.write(link)
       }
